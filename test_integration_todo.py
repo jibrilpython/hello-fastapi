@@ -17,7 +17,7 @@ def prepare_database():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     yield
-    # После теста можно ничего не делать — БД маленькая.
+    
 
 
 client = TestClient(app)
@@ -60,10 +60,10 @@ def test_add_todo_creates_record_and_shows_on_home():
     )
 
     assert response.status_code == 200
-    # Задача должна появиться в HTML
+    
     assert "Test integration task" in response.text
 
-    # И реально сохраниться в БД
+   
     todos = get_all_todos()
     assert len(todos) == 1
     assert todos[0].title == "Test integration task"
